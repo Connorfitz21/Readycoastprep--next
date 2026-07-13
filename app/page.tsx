@@ -1,65 +1,179 @@
-import Image from "next/image";
-
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="min-h-screen bg-slate-950 text-white">
+      <header className="border-b border-slate-800">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+          <div>
+            <p className="text-xl font-black tracking-wide">READY COAST</p>
+            <p className="text-xs font-bold tracking-[0.35em] text-sky-400">
+              PREP
+            </p>
+          </div>
+
+          <button className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-900">
+            Finish setup
+          </button>
+        </div>
+      </header>
+
+      <section className="mx-auto max-w-7xl px-6 py-12">
+        <div className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr]">
+          <div>
+            <p className="mb-4 text-sm font-bold tracking-[0.25em] text-amber-400">
+              HOUSEHOLD PREPAREDNESS
+            </p>
+
+            <h1 className="max-w-3xl text-5xl font-black tracking-tight sm:text-6xl">
+              Plan. Prepare. Protect.
+            </h1>
+
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
+              Build a household emergency plan, identify critical gaps, and
+              improve your readiness one action at a time.
+            </p>
+
+            <div className="mt-8 flex flex-wrap gap-3">
+              <button className="rounded-xl bg-sky-500 px-6 py-3 font-bold text-white hover:bg-sky-400">
+                Start household setup
+              </button>
+
+              <button className="rounded-xl border border-slate-700 px-6 py-3 font-bold hover:bg-slate-900">
+                View inventory
+              </button>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-center">
+            <div className="flex h-52 w-52 flex-col items-center justify-center rounded-full border-[14px] border-slate-800 bg-slate-900">
+              <p className="text-5xl font-black">0</p>
+              <p className="text-sm text-slate-400">out of 100</p>
+              <p className="mt-2 text-xs font-bold tracking-wider text-sky-400">
+                READINESS
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <MetricCard
+            label="Water available"
+            value="0 days"
+            detail="Complete setup to calculate"
+          />
+          <MetricCard
+            label="Food available"
+            value="0 days"
+            detail="Complete setup to calculate"
+          />
+          <MetricCard
+            label="Plan status"
+            value="Not started"
+            detail="Communication and evacuation"
+          />
+          <MetricCard
+            label="Needs attention"
+            value="0"
+            detail="Missing or expired items"
+          />
+        </div>
+
+        <div className="mt-8 grid gap-6 lg:grid-cols-2">
+          <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+            <p className="text-xs font-bold tracking-[0.2em] text-sky-400">
+              PRIORITIES
+            </p>
+            <h2 className="mt-2 text-2xl font-bold">
+              Your highest-impact actions
+            </h2>
+
+            <div className="mt-6 space-y-4">
+              <Priority number={1} text="Complete household setup" />
+              <Priority number={2} text="Record emergency water supplies" />
+              <Priority number={3} text="Choose an evacuation destination" />
+            </div>
+          </section>
+
+          <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+            <p className="text-xs font-bold tracking-[0.2em] text-sky-400">
+              SCORE
+            </p>
+            <h2 className="mt-2 text-2xl font-bold">
+              Where your score comes from
+            </h2>
+
+            <div className="mt-6 space-y-5">
+              <ScoreBar label="Water" points="0 / 20" percent={0} />
+              <ScoreBar label="Food" points="0 / 15" percent={0} />
+              <ScoreBar
+                label="Medical and safety"
+                points="0 / 15"
+                percent={0}
+              />
+              <ScoreBar
+                label="Communication"
+                points="0 / 10"
+                percent={0}
+              />
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  );
+}
+
+type MetricCardProps = {
+  label: string;
+  value: string;
+  detail: string;
+};
+
+function MetricCard({ label, value, detail }: MetricCardProps) {
+  return (
+    <article className="rounded-2xl border border-slate-800 bg-slate-900 p-5">
+      <p className="text-sm text-slate-400">{label}</p>
+      <p className="mt-2 text-3xl font-black">{value}</p>
+      <p className="mt-2 text-xs text-slate-500">{detail}</p>
+    </article>
+  );
+}
+
+type PriorityProps = {
+  number: number;
+  text: string;
+};
+
+function Priority({ number, text }: PriorityProps) {
+  return (
+    <button className="flex w-full items-center gap-4 rounded-xl border border-slate-800 p-4 text-left hover:bg-slate-800">
+      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-sky-500 font-black">
+        {number}
+      </span>
+      <span className="font-semibold">{text}</span>
+    </button>
+  );
+}
+
+type ScoreBarProps = {
+  label: string;
+  points: string;
+  percent: number;
+};
+
+function ScoreBar({ label, points, percent }: ScoreBarProps) {
+  return (
+    <div>
+      <div className="mb-2 flex justify-between text-sm">
+        <span>{label}</span>
+        <span className="font-bold">{points}</span>
+      </div>
+
+      <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+        <div
+          className="h-full rounded-full bg-sky-500"
+          style={{ width: `${percent}%` }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      </div>
     </div>
   );
 }
