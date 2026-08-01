@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 
 type HouseholdData = {
@@ -171,14 +172,15 @@ export default function Home() {
     <main className="min-h-screen bg-slate-950 text-white">
       <header className="border-b border-slate-800">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-          <div>
-            <p className="text-xl font-black tracking-wide">
-              READY COAST
-            </p>
-
-            <p className="text-xs font-bold tracking-[0.35em] text-sky-400">
-              PREP
-            </p>
+          <div className="flex items-center">
+            <Image
+              src="/ready-coast-prep-logo.png"
+              alt="Ready Coast Prep. Prepare today. Protect tomorrow."
+              width={691}
+              height={325}
+              priority
+              className="h-auto w-[300px] max-w-[62vw] object-contain"
+            />
           </div>
 
           <button
@@ -198,7 +200,7 @@ export default function Home() {
             </p>
 
             <h1 className="max-w-3xl text-5xl font-black tracking-tight sm:text-6xl">
-              Plan. Prepare. Protect.
+              Prepare today. Protect tomorrow.
             </h1>
 
             <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-300">
