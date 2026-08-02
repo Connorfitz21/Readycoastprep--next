@@ -327,11 +327,25 @@ export default function Home() {
           </div>
 
           <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
-            <ResourceCard
-              title="72-hour supply guide"
-              description="Water, food, lighting, medical supplies, sanitation, documents, and charging."
-              items={["1 gallon of water per person per day", "Shelf-stable meals", "First aid and prescriptions"]}
-            />
+            <a
+              href="/emergency-water-storage"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Emergency water storage</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Calculate how much water your household needs and learn how to select, sanitize, label, rotate, and safely use storage containers.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["1 gallon per person per day", "Three-day minimum", "Two weeks when possible"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open water storage guide</p>
+            </a>
             <a
               href="/hurricane-preparedness-checklist"
               className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
