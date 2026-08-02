@@ -365,11 +365,25 @@ export default function Home() {
               </ul>
               <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open full checklist</p>
             </a>
-            <ResourceCard
-              title="Family communication plan"
-              description="Create backup contacts and meeting locations for outages or separation."
-              items={["Out-of-area contact", "Two meeting places", "Printed phone numbers"]}
-            />
+            <a
+              href="/power-outage-checklist"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Power outage checklist</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Plan for food safety, lighting, communications, medical needs, backup power, and the point when staying home is no longer safe.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["0–4 hour actions", "Extended outage plan", "Generator and CO safety"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open outage checklist</p>
+            </a>
             <ResourceCard
               title="Vehicle and evacuation kit"
               description="Prepare your vehicle for traffic, flooding detours, and extended travel."
