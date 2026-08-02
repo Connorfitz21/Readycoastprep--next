@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 type HouseholdData = {
   householdName: string;
@@ -56,6 +56,30 @@ export default function Home() {
   const [inventoryOpen, setInventoryOpen] = useState(false);
   const [setupComplete, setSetupComplete] = useState(false);
   const [step, setStep] = useState(1);
+
+  useEffect(() => {
+    try {
+      const savedHousehold = window.localStorage.getItem("rcp-household");
+      const savedSetup = window.localStorage.getItem("rcp-setup-complete");
+
+      if (savedHousehold) {
+        setHousehold({ ...initialHousehold, ...JSON.parse(savedHousehold) });
+      }
+
+      if (savedSetup === "true") {
+        setSetupComplete(true);
+      }
+    } catch {
+      // Keep the default local-only setup if saved browser data is unavailable.
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!setupComplete) return;
+
+    window.localStorage.setItem("rcp-household", JSON.stringify(household));
+    window.localStorage.setItem("rcp-setup-complete", "true");
+  }, [household, setupComplete]);
 
   const people =
     household.adults + household.children + household.seniors;
@@ -172,44 +196,36 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-950 text-white">
       <header className="border-b border-slate-800">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+        <div className="mx-auto flex w-full max-w-7xl items-end justify-between gap-8 px-6 py-3">
           <div className="flex items-center gap-4">
             <Image
-              src="/ready-coast-prep-icon.png"
-              alt="Ready Coast Prep lighthouse logo"
-              width={64}
-              height={64}
-              priority
-              className="h-14 w-14 rounded-xl object-cover"
-            />
-            <div>
-              <p className="text-xl font-black tracking-wide">
-                READY COAST
-              </p>
-              <p className="text-xs font-bold tracking-[0.35em] text-amber-400">
-                PREP
-              </p>
-            </div>
+  src="/ready-coast-prep-logo.png"
+  alt="Ready Coast Prep logo"
+  width={320}
+  height={76}
+  priority
+  className="h-auto w-[240px] md:w-[300px]"
+/>
           </div>
 
-          <div className="flex items-center gap-3">
-            <nav className="hidden items-center gap-5 text-sm font-semibold text-slate-300 md:flex" aria-label="Primary navigation">
+          <div className="ml-auto flex items-center justify-end gap-5 pb-2">
+            <nav className="hidden items-center gap-7 text-base font-semibold text-slate-300 lg:flex">
+              <a href="#readiness-tool" className="hover:text-white">Readiness Tool</a>
+              <a href="/preparedness-plan" className="hover:text-white">My Plan</a>
               <a href="#resources" className="hover:text-white">Guides</a>
-              <a href="#trusted-resources" className="hover:text-white">Official resources</a>
-              <a href="#priorities" className="hover:text-white">Priorities</a>
+              <a href="#trusted-resources" className="hover:text-white">Official Resources</a>
               <a href="/about" className="hover:text-white">About</a>
             </nav>
             <button
               onClick={() => setSetupOpen(true)}
-              className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-900"
-            >
+              className="shrink-0 rounded-lg border border-slate-700 px-5 py-3 text-base font-semibold hover:bg-slate-900">
               {setupComplete ? "Review setup" : "Finish setup"}
             </button>
           </div>
         </div>
       </header>
 
-      <section className="mx-auto max-w-7xl px-6 py-12">
+      <section id="readiness-tool" className="mx-auto max-w-7xl scroll-mt-24 px-6 py-12">
         <div className="grid gap-8 lg:grid-cols-[1.4fr_0.6fr]">
           <div>
             <p className="mb-4 text-sm font-bold tracking-[0.25em] text-amber-400">
@@ -241,6 +257,13 @@ export default function Home() {
               >
                 View inventory
               </button>
+
+              <a
+                href="/preparedness-plan"
+                className="rounded-xl border border-amber-400/60 px-6 py-3 font-bold text-amber-300 hover:bg-amber-400/10"
+              >
+                Build my action plan
+              </a>
             </div>
           </div>
 
@@ -322,11 +345,11 @@ export default function Home() {
             <p className="max-w-2xl text-sm leading-6 text-slate-400">
               Use these planning guides to turn your household baseline into
               concrete actions for coastal storms, power outages, evacuation,
-              communications, and long-term recovery.
+              communications, pet safety, renter constraints, and long-term recovery.
             </p>
           </div>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             <a
               href="/emergency-water-storage"
               className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
@@ -384,11 +407,154 @@ export default function Home() {
               </ul>
               <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open outage checklist</p>
             </a>
-            <ResourceCard
-              title="Vehicle and evacuation kit"
-              description="Prepare your vehicle for traffic, flooding detours, and extended travel."
-              items={["Half tank minimum", "Maps and chargers", "Pet and child supplies"]}
-            />
+            <a
+              href="/emergency-food-supply-guide"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Emergency food supply</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Calculate meal-equivalents and build a no-cook, budget-conscious food plan that accounts for outages, flooding, dietary needs, and evacuation.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["Household food calculator", "3-, 7-, and 14-day levels", "Outage and flood safety"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open food supply guide</p>
+            </a>
+            <a
+              href="/emergency-communication-plan"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Emergency communication plan</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Create and print a household contact, alert, meeting-place, backup communication, and reunification plan that still works during outages or evacuation.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["Fillable printable worksheet", "Out-of-area contact plan", "Alerts and backup methods"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Build communication plan</p>
+            </a>
+            <a
+              href="/coastal-evacuation-guide"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Coastal evacuation guide</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Build a departure plan around official zones, destinations, routes, fuel, pets, medical needs, traffic constraints, and reentry.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["Zone and route planning", "Printable departure check", "Common failure lessons"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open evacuation guide</p>
+            </a>
+            <a
+              href="/apartment-renter-emergency-preparedness"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Apartment and renter preparedness</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Build a realistic year-round plan for limited storage, shared building systems, stairwells, outages, flooding, insurance, pets, and evacuation.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["Fillable apartment plan", "Fire and outage readiness", "Insurance and recovery records"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Build a renter emergency plan</p>
+            </a>
+            <a
+              href="/winter-power-outage-cold-weather"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Winter power outage and extreme cold</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Prepare for loss of heat, carbon monoxide hazards, frozen pipes, medication needs, pets, apartment constraints, and the decision to relocate.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["Fillable cold-weather plan", "Safe heat and CO prevention", "Pipes, travel, food, and medicine"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open winter readiness guide</p>
+            </a>
+            <a
+              href="/extreme-heat-power-outage"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Extreme heat and power outage</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Plan for dangerous indoor heat, failed air conditioning, medication and medical-device needs, pets, apartments, and early relocation.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["Fillable heat outage plan", "Fan and cooling decisions", "Medical, pet, and apartment needs"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open extreme heat guide</p>
+            </a>
+            <a
+              href="/pet-hurricane-evacuation-guide"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Pet hurricane and evacuation guide</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">Build and print a practical pet plan for carriers, records, medication, food, water, lodging, shelters, backup caregivers, and post-storm safety.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["Fillable pet emergency record", "Pet kit and evacuation timeline", "Shelter and lodging backups"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Build a pet emergency plan</p>
+            </a>
+          </div>
+        </section>
+
+        <section className="mt-12 rounded-3xl border border-sky-500/40 bg-gradient-to-br from-sky-950 to-slate-900 p-6 sm:p-8">
+          <div className="grid items-center gap-6 lg:grid-cols-[1fr_auto]">
+            <div>
+              <p className="text-xs font-bold tracking-[0.2em] text-amber-400">CONNECTED HOUSEHOLD PLAN</p>
+              <h2 className="mt-2 text-3xl font-black">Turn your score and guides into one prioritized plan</h2>
+              <p className="mt-3 max-w-3xl leading-7 text-slate-300">
+                Ready Coast Prep can use your locally saved household setup, housing type, pets, medical needs, hazards, and current supplies to recommend the right next actions and guide pages. Print the finished plan and keep it with your emergency records.
+              </p>
+            </div>
+            <a href="/preparedness-plan" className="rounded-xl bg-sky-500 px-6 py-3 text-center font-bold hover:bg-sky-400">
+              Create my preparedness plan
+            </a>
           </div>
         </section>
 
