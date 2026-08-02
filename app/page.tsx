@@ -331,11 +331,25 @@ export default function Home() {
               description="Water, food, lighting, medical supplies, sanitation, documents, and charging."
               items={["1 gallon of water per person per day", "Shelf-stable meals", "First aid and prescriptions"]}
             />
-            <ResourceCard
-              title="Hurricane preparation"
-              description="A phased checklist for the week before landfall through the first day after the storm."
-              items={["Secure the home", "Fuel and charge devices", "Know evacuation routes"]}
-            />
+            <a
+              href="/hurricane-preparedness-checklist"
+              className="group rounded-2xl border border-slate-800 bg-slate-900 p-5 transition hover:-translate-y-0.5 hover:border-sky-500"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <h3 className="text-xl font-bold group-hover:text-sky-300">Hurricane preparation</h3>
+                <span aria-hidden="true" className="text-sky-400">→</span>
+              </div>
+              <p className="mt-2 text-sm leading-6 text-slate-400">A phased checklist for supplies, home protection, evacuation, sheltering, and post-storm safety.</p>
+              <ul className="mt-4 space-y-2 text-sm text-slate-300">
+                {["Secure the home", "Fuel and charge devices", "Know evacuation routes"].map((item) => (
+                  <li key={item} className="flex gap-2">
+                    <span className="text-amber-400">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-5 text-xs font-bold uppercase tracking-wider text-sky-400">Open full checklist</p>
+            </a>
             <ResourceCard
               title="Family communication plan"
               description="Create backup contacts and meeting locations for outages or separation."
