@@ -197,6 +197,7 @@ export default function Home() {
               <a href="#resources" className="hover:text-white">Guides</a>
               <a href="#trusted-resources" className="hover:text-white">Official resources</a>
               <a href="#priorities" className="hover:text-white">Priorities</a>
+              <a href="/about" className="hover:text-white">About</a>
             </nav>
             <button
               onClick={() => setSetupOpen(true)}
@@ -504,6 +505,16 @@ export default function Home() {
           </section>
         </div>
       </section>
+
+      <footer className="border-t border-slate-800">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-6 py-8 text-sm text-slate-400">
+          <p>© 2026 Ready Coast Prep</p>
+          <div className="flex gap-5">
+            <a href="/about" className="hover:text-white">About</a>
+            <a href="/privacy-policy" className="hover:text-white">Privacy</a>
+          </div>
+        </div>
+      </footer>
 
       {inventoryOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4">
