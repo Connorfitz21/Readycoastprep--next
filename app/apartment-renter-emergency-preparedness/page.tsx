@@ -4,9 +4,9 @@ import PrintButton from "./PrintButton";
 import RenterPlanWorksheet from "./RenterPlanWorksheet";
 
 export const metadata: Metadata = {
-  title: "Apartment and Renter Emergency Preparedness | Ready Coast Prep",
+  title: "Apartment Emergency Preparedness Checklist for Renters | Ready Coast Prep",
   description:
-    "A practical, printable emergency plan for apartments and rentals: limited storage, stairwells, outages, flooding, insurance, landlords, pets, and evacuation.",
+    "A printable apartment emergency preparedness checklist for renters covering limited storage, stairs, outages, flooding, insurance, pets, building systems, and evacuation.",
   alternates: { canonical: "https://readycoastprep.com/apartment-renter-emergency-preparedness" },
   openGraph: {
     title: "Apartment and Renter Emergency Preparedness",
@@ -61,7 +61,7 @@ export default function ApartmentRenterPreparednessPage() {
       <header className="border-b border-slate-800 print:hidden">
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
           <Link href="/" className="font-black tracking-wide">READY COAST PREP</Link>
-          <div className="flex items-center gap-4"><Link href="/#resources" className="text-sm font-semibold text-slate-300 hover:text-white">All guides</Link><PrintButton /></div>
+          <div className="flex items-center gap-4"><Link href="/guides" className="text-sm font-semibold text-slate-300 hover:text-white">All guides</Link><PrintButton /></div>
         </div>
       </header>
 

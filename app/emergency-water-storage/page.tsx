@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import PrintPageButton from "../components/PrintPageButton";
 
 export const metadata: Metadata = {
-  title: "Emergency Water Storage Guide | Ready Coast Prep",
+  title: "Emergency Water Storage: How Much Water to Store & How | Ready Coast Prep",
   description:
-    "Calculate your household emergency water supply and learn how to choose containers, sanitize them, store water safely, rotate it, and treat water during an emergency.",
-  alternates: { canonical: "/emergency-water-storage" },
+    "Calculate how much emergency water your household needs, then learn safe containers, sanitation, storage, rotation, and emergency treatment using official guidance.",
+  alternates: { canonical: "https://readycoastprep.com/emergency-water-storage" },
   openGraph: {
-    title: "Emergency Water Storage Guide | Ready Coast Prep",
+    title: "Emergency Water Storage: How Much Water to Store & How | Ready Coast Prep",
     description:
       "A practical guide to calculating, storing, rotating, and safely using an emergency household water supply.",
-    url: "/emergency-water-storage",
+    url: "https://readycoastprep.com/emergency-water-storage",
     type: "article",
     images: ["/ready-coast-prep-social.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Emergency Water Storage Guide | Ready Coast Prep",
+    title: "Emergency Water Storage: How Much Water to Store & How | Ready Coast Prep",
     description:
       "Calculate and build a safe emergency water supply for your household.",
     images: ["/ready-coast-prep-social.png"],
@@ -181,10 +182,10 @@ export default function EmergencyWaterStoragePage() {
             </div>
           </Link>
           <Link
-            href="/"
+            href="/guides"
             className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-900"
           >
-            Back to dashboard
+            All guides
           </Link>
         </div>
       </header>
@@ -197,6 +198,13 @@ export default function EmergencyWaterStoragePage() {
         <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
           Calculate a realistic household supply, store it safely, and know what to do when your normal water source is unavailable or unsafe.
         </p>
+
+        <div className="mt-8 flex flex-wrap gap-3 print:hidden">
+          <PrintPageButton label="Print water guide" />
+          <Link href="/preparedness-plan" className="rounded-xl border border-sky-500/50 px-5 py-3 text-sm font-bold text-sky-300 hover:bg-sky-500/10">
+            Add this to my plan
+          </Link>
+        </div>
 
         <div className="mt-8 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-5 text-sm leading-6 text-amber-100">
           <strong>Baseline:</strong> Store at least one gallon per person per day for three days. Build toward a two-week supply when possible.

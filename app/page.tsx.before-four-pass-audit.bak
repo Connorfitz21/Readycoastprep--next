@@ -352,7 +352,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-                        <section id="resources" className="mt-14 scroll-mt-24 border-t border-slate-800 pt-10">
+                <section id="resources" className="mt-14 scroll-mt-24 border-t border-slate-800 pt-10">
           <div className="flex flex-wrap items-end justify-between gap-5">
             <div>
               <p className="text-sm font-semibold text-amber-400">Featured guides</p>
@@ -529,7 +529,7 @@ export default function Home() {
 
           <section className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
             <p className="text-xs font-bold tracking-[0.2em] text-sky-400">
-              READINESS READINESS READINESS READINESS SCORE
+              READINESS READINESS READINESS SCORE
             </p>
 
             <h2 className="mt-2 text-2xl font-bold">
@@ -1110,7 +1110,6 @@ function CheckOption({
     </label>
   );
 }
-
 
 
 

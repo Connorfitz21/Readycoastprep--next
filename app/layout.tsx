@@ -1,3 +1,4 @@
+﻿import SiteAnalytics from "./components/SiteAnalytics";
 import type { Metadata } from "next";
 import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -59,7 +60,9 @@ export default function RootLayout({
   </Script>
 
   {children}
+        <SiteAnalytics />
 </body>
     </html>
   );
 }
+

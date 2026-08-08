@@ -1,0 +1,47 @@
+READY COAST PREP — POST-DEPLOY ACTIONS THAT REQUIRE THE OWNER'S ACCOUNTS
+
+Everything in the release package can be prepared in code. These are the actions that
+cannot be performed from the package because they require your authenticated accounts.
+
+1. VERCEL / LIVE SITE
+- Confirm deployment succeeded.
+- Visit https://www.readycoastprep.com and confirm it permanently redirects to https://readycoastprep.com.
+- Check the homepage and the three new tool URLs on a phone.
+
+2. GOOGLE SEARCH CONSOLE
+- Inspect the canonical non-www homepage.
+- Inspect /guides.
+- Inspect /emergency-water-calculator.
+- Inspect /preparedness-pack.
+- Request indexing for the highest-value URLs as quota allows.
+- Resubmit /sitemap.xml after deployment.
+- Do not repeatedly request indexing for unchanged pages.
+
+3. GOOGLE ANALYTICS
+The release adds GA4-compatible event calls through the site's existing gtag object.
+After real visits occur, look for:
+- readiness_start
+- plan_open
+- guide_open
+- print_action
+- install_app_click
+- official_resource_click
+If the existing site is not loading GA4/gtag, these events simply do nothing and do not
+break the site. Connect the existing Analytics property before expecting event reports.
+
+4. DISTRIBUTION
+Use the Ready Coast Prep brand, not a personal identity, if you want to keep the project
+separate from yourself. Promote useful tools rather than the homepage in isolation.
+
+FIRST LINKS TO SHARE
+- /emergency-water-calculator
+- /preparedness-pack
+- /power-outage-checklist
+- /hurricane-preparedness-checklist when weather makes it timely
+
+5. WEEKLY DECISION RULE
+Search Console decides what gets improved next:
+- Position 4–20 + impressions: highest optimization priority.
+- Position 20–50 + growing impressions: strengthen intent match and internal links.
+- No impressions: do not keep rewriting immediately; give discovery/crawling time and
+  focus on pages already receiving evidence of demand.

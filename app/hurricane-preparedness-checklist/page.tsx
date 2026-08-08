@@ -1,23 +1,24 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import PrintPageButton from "../components/PrintPageButton";
 
 export const metadata: Metadata = {
-  title: "Hurricane Preparedness Checklist | Ready Coast Prep",
+  title: "Hurricane Preparedness Checklist: What to Do Before a Storm | Ready Coast Prep",
   description:
-    "A practical hurricane preparedness checklist covering evacuation, supplies, home protection, communications, power outages, and post-storm safety.",
-  alternates: { canonical: "/hurricane-preparedness-checklist" },
+    "Use this printable hurricane preparedness checklist to plan what to do before a storm, when to evacuate, what supplies to protect, and how to stay safe after landfall.",
+  alternates: { canonical: "https://readycoastprep.com/hurricane-preparedness-checklist" },
   openGraph: {
-    title: "Hurricane Preparedness Checklist | Ready Coast Prep",
+    title: "Hurricane Preparedness Checklist: What to Do Before a Storm | Ready Coast Prep",
     description:
       "Prepare your household before a hurricane with a practical checklist for supplies, evacuation, communications, and recovery.",
-    url: "/hurricane-preparedness-checklist",
+    url: "https://readycoastprep.com/hurricane-preparedness-checklist",
     type: "article",
     images: ["/ready-coast-prep-social.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hurricane Preparedness Checklist | Ready Coast Prep",
+    title: "Hurricane Preparedness Checklist: What to Do Before a Storm | Ready Coast Prep",
     description:
       "A practical checklist for hurricane supplies, evacuation, communications, and recovery.",
     images: ["/ready-coast-prep-social.png"],
@@ -189,10 +190,10 @@ export default function HurricanePreparednessChecklistPage() {
             </div>
           </Link>
           <Link
-            href="/"
+            href="/guides"
             className="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold hover:bg-slate-900"
           >
-            Back to dashboard
+            All guides
           </Link>
         </div>
       </header>
@@ -209,6 +210,13 @@ export default function HurricanePreparednessChecklistPage() {
           evacuate safely when directed, and avoid preventable hazards after
           landfall.
         </p>
+
+        <div className="mt-8 flex flex-wrap gap-3 print:hidden">
+          <PrintPageButton label="Print hurricane checklist" />
+          <Link href="/preparedness-plan" className="rounded-xl border border-sky-500/50 px-5 py-3 text-sm font-bold text-sky-300 hover:bg-sky-500/10">
+            Add this to my plan
+          </Link>
+        </div>
 
         <div className="mt-8 rounded-2xl border border-amber-500/40 bg-amber-500/10 p-5 text-sm leading-6 text-amber-100">
           <strong>Important:</strong> During an active threat, follow evacuation

@@ -4,21 +4,21 @@ import Link from "next/link";
 import PrintButton from "./PrintButton";
 
 export const metadata: Metadata = {
-  title: "Power Outage Checklist | Ready Coast Prep",
+  title: "Power Outage Checklist: Food, Generator & Backup Power Safety | Ready Coast Prep",
   description:
-    "A practical power outage checklist for food, lighting, phones, medical needs, heat, cooling, generators, carbon monoxide safety, and extended outages.",
-  alternates: { canonical: "/power-outage-checklist" },
+    "Use this printable power outage checklist for food safety, generators, carbon monoxide, phones, medical devices, backup power, heat, cold, and extended outages.",
+  alternates: { canonical: "https://readycoastprep.com/power-outage-checklist" },
   openGraph: {
-    title: "Power Outage Checklist | Ready Coast Prep",
+    title: "Power Outage Checklist: Food, Generator & Backup Power Safety | Ready Coast Prep",
     description:
       "Prepare for short and extended outages with a realistic household checklist, safety guidance, and common lessons from past outages.",
-    url: "/power-outage-checklist",
+    url: "https://readycoastprep.com/power-outage-checklist",
     type: "article",
     images: ["/ready-coast-prep-social.png"],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Power Outage Checklist | Ready Coast Prep",
+    title: "Power Outage Checklist: Food, Generator & Backup Power Safety | Ready Coast Prep",
     description:
       "A realistic household checklist for short and extended power outages.",
     images: ["/ready-coast-prep-social.png"],

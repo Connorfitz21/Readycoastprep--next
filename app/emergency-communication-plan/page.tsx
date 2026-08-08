@@ -5,13 +5,13 @@ import CommunicationWorksheet from "./CommunicationWorksheet";
 import PrintButton from "./PrintButton";
 
 export const metadata: Metadata = {
-  title: "Emergency Communication Plan and Printable Worksheet | Ready Coast Prep",
-  description: "Build and print a household emergency communication plan with contacts, meeting places, alerts, backup methods, children, pets, medical needs, and outage contingencies.",
-  alternates: { canonical: "/emergency-communication-plan" },
+  title: "Family Emergency Communication Plan & Printable Worksheet | Ready Coast Prep",
+  description: "Build and print a family emergency communication plan with contacts, meeting places, official alerts, backup methods, children, pets, medical needs, and outage contingencies.",
+  alternates: { canonical: "https://readycoastprep.com/emergency-communication-plan" },
   openGraph: {
     title: "Emergency Communication Plan | Ready Coast Prep",
     description: "A practical, printable household communication plan for storms, evacuations, outages, and family reunification.",
-    url: "/emergency-communication-plan",
+    url: "https://readycoastprep.com/emergency-communication-plan",
     type: "article",
     images: ["/ready-coast-prep-social.png"],
   },
@@ -70,7 +70,7 @@ export default function EmergencyCommunicationPlanPage() {
             <Image src="/icon.png" alt="Ready Coast Prep" width={48} height={48} className="h-11 w-11 rounded-lg" />
             <div><p className="font-black tracking-wide">READY COAST</p><p className="text-xs font-bold tracking-[0.3em] text-amber-400">PREP</p></div>
           </Link>
-          <Link href="/#resources" className="text-sm font-semibold text-slate-300 hover:text-white">All guides</Link>
+          <Link href="/guides" className="text-sm font-semibold text-slate-300 hover:text-white">All guides</Link>
         </div>
       </header>
 
